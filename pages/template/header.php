@@ -79,7 +79,7 @@
                 <ul class="profile-dropdown onhover-show-div">
                   <li><a href="./profile"><i data-feather="user"></i><span>Profile </span></a></li>
                   <li><a href="./settings"><i data-feather="settings"></i><span>Settings</span></a></li>
-                  <li><a href="#"><i data-feather="log-out"> </i><span>Log out</span></a></li>
+                  <li><a href="../login?logout=1"><i data-feather="log-out"> </i><span>Log out</span></a></li>
                 </ul>
               </li>
             </ul>
