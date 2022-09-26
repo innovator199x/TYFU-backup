@@ -85,6 +85,7 @@
                     if (response == 'success') {
                         document.location='./pages/dashboard';
                     } else {
+                      // alert(response);
                         swal(
                             "Error!", "Invalid Email or Password. Please try again.", "error"           
                         )

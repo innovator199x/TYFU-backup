@@ -5,9 +5,9 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="../assets/images/favicon.png" type="image/x-icon">
-    <link rel="shortcut icon" href="../assets/images/favicon.png" type="image/x-icon">
-    <title>Cuba - Premium Admin Template</title>
+    <link rel="icon" href="../assets/images/logo/<?php echo ($_SESSION['source'] == 'MBT') ? 'my.png':'up.png'; ?>" type="image/x-icon">
+    <link rel="shortcut icon" href="../assets/images/logo/<?php  echo ($_SESSION['source'] == 'MBT') ? 'my.png':'up.png'; ?>" type="image/x-icon">
+    <title>Dashboard | <?php echo ($_SESSION['source'] == 'MBT') ? 'MyBeautyTech':'UpsellTech'; ?></title>
     <!-- Google font-->
     <link href="https://fonts.googleapis.com/css?family=Rubik:400,400i,500,500i,700,700i&amp;display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,700,700i,900&amp;display=swap" rel="stylesheet">
@@ -22,6 +22,7 @@
     <link rel="stylesheet" type="text/css" href="../assets/css/vendors/feather-icon.css">
     <!-- Plugins css start-->
     <link rel="stylesheet" type="text/css" href="../assets/css/vendors/scrollbar.css">
+    <link rel="stylesheet" type="text/css" href="../assets/css/vendors/datatables.css">
     <link rel="stylesheet" type="text/css" href="../assets/css/vendors/animate.css">
     <link rel="stylesheet" type="text/css" href="../assets/css/vendors/chartist.css">
     <link rel="stylesheet" type="text/css" href="../assets/css/vendors/date-picker.css">
@@ -33,6 +34,8 @@
     <link id="color" rel="stylesheet" href="../assets/css/color-1.css" media="screen">
     <!-- Responsive css-->
     <link rel="stylesheet" type="text/css" href="../assets/css/responsive.css">
+
+    
   </head>
 
   <style>
@@ -71,11 +74,11 @@
             <ul class="nav-menus">
               <li class="maximize"><a class="text-dark" href="#!" onclick="javascript:toggleFullScreen()"><i data-feather="maximize"></i></a></li>
               <li class="profile-nav onhover-dropdown p-0 me-0">
-                <div class="media profile-media"><img class="b-r-10" src="../assets/images/dashboard/profile.jpg" alt="">
-                  <div class="media-body"><span>Emay Walter</span>
-                    <p class="mb-0 font-roboto">Admin <i class="middle fa fa-angle-down"></i></p>
+                <!-- <div class="media profile-media"><img class="b-r-10" src="../assets/images/logo/<?php // echo ($_SESSION['source'] == 'MBT') ? 'mybeautytech.png':'upselltech.png'; ?>" alt=""> -->
+                  <div class="media-body"><span><?=$_SESSION['name'];?></span>
+                    <p class="mb-0 font-roboto">User <i class="middle fa fa-angle-down"></i></p>
                   </div>
-                </div>
+                <!-- </div> -->
                 <ul class="profile-dropdown onhover-show-div">
                   <li><a href="./profile"><i data-feather="user"></i><span>Profile </span></a></li>
                   <li><a href="./settings"><i data-feather="settings"></i><span>Settings</span></a></li>
@@ -93,16 +96,16 @@
         <!-- Page Sidebar Start-->
         <div class="sidebar-wrapper">
           <div>
-            <div class="logo-wrapper"><a href="./dashboard"><img class="img-fluid for-light" src="../assets/images/logo/logo.png" alt=""><img class="img-fluid for-dark" src="../assets/images/logo/logo_dark.png" alt=""></a>
+            <div class="logo-wrapper"><a href="./dashboard"><img class="img-fluid for-light" src="../assets/images/logo/<?php echo ($_SESSION['source'] == 'MBT') ? 'mbt-light.png':'upsell-light.png'; ?>" alt=""><img class="img-fluid for-dark" style="-webkit-filter: brightness(0) invert(1);" src="../assets/images/logo/<?php echo ($_SESSION['source'] == 'MBT') ? 'mbt-light.png':'upsell-light.png'; ?>" alt=""></a>
               <div class="back-btn"><i class="fa fa-angle-left"></i></div>
               <div class="toggle-sidebar"><i class="status_toggle middle sidebar-toggle" data-feather="grid"> </i></div>
             </div>
-            <div class="logo-icon-wrapper"><a href="./dashboard"><img class="img-fluid" src="../assets/images/logo/logo-icon.png" alt=""></a></div>
+            <div class="logo-icon-wrapper"><a href="./dashboard"><img class="img-fluid" src="../assets/images/logo/<?php echo ($_SESSION['source'] == 'MBT') ? 'mbt-light.png':'upsell-light.png'; ?>" alt=""></a></div>
             <nav class="sidebar-main">
               <div class="left-arrow" id="left-arrow"><i data-feather="arrow-left"></i></div>
               <div id="sidebar-menu">
                 <ul class="sidebar-links" id="simple-bar">
-                  <li class="back-btn"><a href="./dashboard"><img class="img-fluid" src="../assets/images/logo/logo-icon.png" alt=""></a>
+                  <li class="back-btn"><a href="./dashboard"><img class="img-fluid" src="../assets/images/logo/<?php echo ($_SESSION['source'] == 'MBT') ? 'mbt-light.png':'upsell-light.png'; ?>" alt=""></a>
                     <div class="mobile-back text-end"><span>Back</span><i class="fa fa-angle-right ps-2" aria-hidden="true"></i></div>
                   </li>
                   <li class="sidebar-main-title">

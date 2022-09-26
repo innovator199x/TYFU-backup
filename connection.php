@@ -1,12 +1,13 @@
 <?php
 
-if ($_SERVER['SERVER_NAME'] == 'localhostssdasfasf') {
+if ($_SERVER['SERVER_NAME'] == 'localhost') {
     $db_host = "localhost";
     $db_user = "root";
     $db_pass = "";
     $db_name = "tyfu_db";
 } else { //live db
-    $db_host = "209.59.156.73";
+    // $db_host = "209.59.156.73";
+    $db_host = "localhost";
     $db_user = "dreeve_tyfu";
     $db_pass = "!eHbk?*q^[2F";
     $db_name = "dreeve_tyfu_db";
