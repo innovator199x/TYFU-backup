@@ -43,11 +43,10 @@
     <!-- Plugins JS Ends-->
     <!-- Theme js-->
     <script src="../assets/js/script.js"></script>
-    <!-- <script src="../assets/js/theme-customizer/customizer.js"></script> -->
+    <script src="../assets/js/theme-customizer/customizer.js"></script>
     <!-- login js-->
     <!-- Plugin used-->
     <!-- Plugins JS start-->
-    <script src="../assets/js/sidebar-menu.js"></script>
     <script src="../assets/js/editor/ckeditor/ckeditor.js"></script>
     <script src="../assets/js/editor/ckeditor/adapters/jquery.js"></script>
     <script src="../assets/js/editor/ckeditor/styles.js"></script>

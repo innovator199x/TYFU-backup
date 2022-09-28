@@ -45,6 +45,7 @@
     } */
   </style>
   <body onload="startTime()" class="dark-only">
+  <!-- <body onload="startTime()" > -->
     <!-- loader starts-->
     <div class="loader-wrapper">
       <div class="loader-index"><span></span></div>
@@ -97,7 +98,8 @@
         <!-- Page Sidebar Start-->
         <div class="sidebar-wrapper">
           <div>
-            <div class="logo-wrapper"><a href="./dashboard"><img class="img-fluid for-light" src="../assets/images/logo/<?php echo ($_SESSION['source'] == 'MBT') ? 'mbt-light.png':'upsell-light.png'; ?>" alt=""><img class="img-fluid for-dark" style="-webkit-filter: brightness(0) invert(1);" src="../assets/images/logo/<?php echo ($_SESSION['source'] == 'MBT') ? 'mbt-light.png':'upsell-light.png'; ?>" alt=""></a>
+            <!-- <div class="logo-wrapper"><a href="./dashboard"><img class="img-fluid for-light" src="../assets/images/logo/<?php // echo ($_SESSION['source'] == 'MBT') ? 'mbt-light.png':'upsell-light.png'; ?>" alt=""><img class="img-fluid for-dark" style="-webkit-filter: brightness(0) invert(1);" src="../assets/images/logo/<?php // echo ($_SESSION['source'] == 'MBT') ? 'mybeautytech.png':'upsell-light.png'; ?>" alt=""></a> -->
+            <div class="logo-wrapper"><a href="./dashboard"><img class="img-fluid for-light" style="width: 170px; height: auto;" src="../assets/images/logo/<?php echo ($_SESSION['source'] == 'MBT') ? 'mybeautytech.png':'upsell-light.png'; ?>" alt=""><img class="img-fluid for-dark" style="width: 170px; height: auto;" src="../assets/images/logo/<?php echo ($_SESSION['source'] == 'MBT') ? 'mybeautytech.png':'upsell-light.png'; ?>" alt=""></a>
               <div class="back-btn"><i class="fa fa-angle-left"></i></div>
               <div class="toggle-sidebar"><i class="status_toggle middle sidebar-toggle" data-feather="grid"> </i></div>
             </div>
