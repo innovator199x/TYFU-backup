@@ -32,33 +32,12 @@
                         <input class="form-control" id="name" type="text" placeholder="Enter name">
                       </div>
                       <div class="mb-3">
-                        <label class="col-form-label pt-0">Mobile No.</label>
-                        <input class="form-control" id="mobile_number" type="text" placeholder="Mobile Number">
-                      </div>
-                      <div class="mb-3">
                         <label class="col-form-label pt-0">Business Name</label>
                         <input class="form-control" id="business_name" type="text" placeholder="Business Name">
                       </div>
                       <div class="mb-3">
-                        <label class="col-form-label pt-0">Your Domain</label>
-                        <div class="input-group">
-                          <input class="form-control" id="domain_name" type="text" placeholder="Your Domain"><span class="input-group-text">.thankyoufollowup.com</span>
-                        </div>
-                        <small class="form-text text-muted" id="emailHelp">Domain may take 10-15 mins to resolve properly.</small>
-                      </div>
-                      <div class="mb-3">
-                        <label class="col-form-label pt-0">Business Email</label>
-                        <input class="form-control" id="business_email" type="text" placeholder="Business Email">
-                      </div>
-                      <div class="mb-3">
                         <label class="col-form-label pt-0">Choose Your Business Logo </label>
                         <input class="form-control" id="business_logo" type="file">
-                      </div>
-                    </div>
-                    <div class="col-sm-6">
-                      <div class="mb-3">
-                        <label class="col-form-label pt-0">Business Description</label>
-                        <textarea id="business_desc" class="form-control" placeholder="Business Description"></textarea>
                       </div>
                       <div class="mb-3">
                         <label class="col-form-label pt-0">Select Timezone </label>
@@ -475,18 +454,44 @@
                       </div>
                       <div class="mb-3">
                         <div class="form-group">
-                            <input type="hidden" id="hidden_status_3" name="email_notify" value="0">
-                            <input type="checkbox" name="email_notify" id="email_notify" value="1" checked="">
-                            Note: You will receive email notifications as your customer leaves reviews, feedback and shares your offer. Please uncheck this box if you do not want to receive these notifications.
-                        </div>
-                      </div>
-                      <div class="mb-3">
-                        <div class="form-group">
                             <label class="control-label" for="email">Business  Logo:</label>
                             <input type="hidden" name="logo" value="TheBrew.png">
                             <img src="../assets/images/logo/<?php echo ($_SESSION['source'] == 'MBT') ? 'mbt-light.png':'upsell-light.png'; ?>" alt="Business logo" height="auto" width="150px">
                         </div>
                       </div>
+
+                      
+                      
+                    </div>
+                    <div class="col-sm-6">
+                      <div class="mb-3">
+                        <label class="col-form-label pt-0">Mobile No.</label>
+                        <input class="form-control" id="mobile_number" type="text" placeholder="Mobile Number">
+                      </div>
+                     
+                      <div class="mb-3">
+                        <label class="col-form-label pt-0">Your Domain</label>
+                        <div class="input-group">
+                          <input class="form-control" id="domain_name" type="text" placeholder="Your Domain"><span class="input-group-text">.thankyoufollowup.com</span>
+                        </div>
+                      </div>
+                      <div class="mb-3">
+                        <label class="col-form-label pt-0">Business Email</label>
+                        <input class="form-control" id="business_email" type="text" placeholder="Business Email">
+                      </div>
+                      <div class="mb-3">
+                        <label class="col-form-label pt-0">Business Description</label>
+                        <textarea id="business_desc" class="form-control" placeholder="Business Description"></textarea>
+                      </div>
+                      
+                      <div class="mb-3">
+                        <div class="form-group">
+                            <input type="hidden" id="hidden_status_3" name="email_notify" value="0">
+                            <input type="checkbox" name="email_notify" id="email_notify" value="1" checked="">
+                            Note: You will receive email notifications as your customer leaves reviews, feedback and shares your offer. Please uncheck this box if you do not want to receive these notifications.
+                        </div>
+                      </div>
+                      
                     </div>
                   </div>
                 </div>

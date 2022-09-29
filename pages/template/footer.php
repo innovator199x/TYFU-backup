@@ -46,6 +46,10 @@
     <script src="../assets/js/theme-customizer/customizer.js"></script>
     <!-- login js-->
     <!-- Plugin used-->
+    <script src="../assets/js/prism/prism.min.js"></script>
+    <script src="../assets/js/clipboard/clipboard.min.js"></script>
+    <script src="../assets/js/custom-card/custom-card.js"></script>
+    <script src="../assets/js/button-tooltip-custom.js"></script>
     <!-- Plugins JS start-->
     <script src="../assets/js/editor/ckeditor/ckeditor.js"></script>
     <script src="../assets/js/editor/ckeditor/adapters/jquery.js"></script>
