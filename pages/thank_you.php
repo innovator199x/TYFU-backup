@@ -25,7 +25,7 @@
 
 
           <div class="col-xl-12 xl-100 col-lg-12 box-col-12">
-                <div class="card">
+              <div class="card">
                   <div class="card-header">
                     <h5 class="pull-left">Manage Thank You</h5>
                   </div>
