@@ -1,4 +1,7 @@
-<?php include('./inc/config.php'); ?>
+<?php 
+include('./inc/config.php');
+include('./inc/myfunctions.php');
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
