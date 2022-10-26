@@ -8,57 +8,20 @@
         $data = mysqli_fetch_assoc($results);
 
         if(isset($_POST['submit'])) {
-          // $uploadOk = 1;
-          $allowed = array('png', 'jpg', 'gif', 'jpeg');
-          //print_r($_FILES['image_path']);
-      
-          if (isset($_FILES['business_logo']) && $_FILES['business_logo']['error'] == 0) {
-      
-              $imageFileType = pathinfo($_FILES['business_logo']['name'], PATHINFO_EXTENSION);
-              $logo = '';
-      
-              if ($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg" && $imageFileType != "gif") {
-                    // echo "<script>BootstrapDialog.alert({
-                    //       title: 'Alert',
-                    //       message: 'Please Choose Only Image.',
-                    //       type: BootstrapDialog.TYPE_INFO
-                    //       });</script>";
-                
-                  $uploadOk = 0;
-              }
-      
-              if ($uploadOk == 0) {
-                  //  echo "<script>BootstrapDialog.alert({
-                  //         title: 'Alert',
-                  //         message: 'Please Choose Only Image.',
-                  //         type: BootstrapDialog.TYPE_INFO
-                  //         });</script>";
-                 
-              } else {
-                  if (move_uploaded_file($_FILES['business_logo']['tmp_name'], '../assets/images/business_logo/' . $_FILES['business_logo']['name'])) {
-                     // echo "<script>alert('The file " . basename($_FILES["business_logo"]["name"]) . " has been uploaded.');</script>";
-                  } else {
-                      // echo "<script>BootstrapDialog.alert({
-                      //     title: 'Alert',
-                      //     message: 'Sorry, there was an error in uploading your file.',
-                      //     type: BootstrapDialog.TYPE_INFO
-                      //     });</script>";
-                  }
-              }
-              $logo = $_FILES['business_logo']['name'];
+          
+          $filename = $_FILES["business_logo"]["name"];
+          $tempname = $_FILES["business_logo"]["tmp_name"];
+          $folder = "../assets/images/business_logo/" . $filename;
+
+          if ($filename != '') {
+              move_uploaded_file($tempname, $folder);
+
+              $logo = $filename;
           }else
           {
                $logo = $_POST['logo'];
           }
 
-          // $target_dir = "../assets/images/business_logo/";
-          // $target_file = $target_dir . basename($_FILES["business_logo"]["name"]);
-          // $logo = basename($_FILES["business_logo"]["name"]);
-          // $uploadOk = 1;
-          // $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
-          // Check if image file is a actual image or fake image
-
-            // echo $logo;
           $name = $_POST['name'];
           $mobile = $_POST['mobile_number'];
           $business_name = str_replace(' ', '', $_POST['business_name']);
