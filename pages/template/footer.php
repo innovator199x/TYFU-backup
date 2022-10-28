@@ -1,5 +1,6 @@
         <!-- footer start-->
         <footer class="footer" style="background-color: #262932;">
+        <!-- <footer class="footer" style="background-color: #262932;"> -->
           <div class="container-fluid">
             <div class="row">
               <div class="col-md-12 footer-copyright text-center">
@@ -56,6 +57,8 @@
     <script src="../assets/js/editor/ckeditor/styles.js"></script>
     <script src="../assets/js/editor/ckeditor/ckeditor.custom.js"></script>
     <script src="../assets/js/tooltip-init.js"></script>
+    <script src="../assets/js/sweet-alert/sweetalert.min.js"></script>
+    <script src="../assets/js/sweet-alert/app.js"></script>
     <!-- Plugins JS Ends-->
   </body>
 </html>

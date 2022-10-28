@@ -90,6 +90,7 @@ if(isset($_POST["query"]))
 			$data[] = array(
 				'id'			=>	$row["id"],
 				'name'		=>	str_ireplace($replace_array_1, $replace_array_2, $row["name"]),
+				'email'		=>	str_ireplace($replace_array_1, $replace_array_2, $row["email"]),
 				'mobile_no'		=>	str_ireplace($replace_array_1, $replace_array_2, $row["mobile_no"]),
 				'pin'		=>	str_ireplace($replace_array_1, $replace_array_2, $row["pin"])
 				// 'post_description'	=>	str_ireplace($replace_array_1, $replace_array_2, $row["post_description"])
@@ -126,6 +127,7 @@ if(isset($_POST["query"]))
 			$data[] = array(
 				'id'			=>	$row["id"],
 				'name'		=>	$row["name"],
+				'email'		=>	$row["email"],
 				'mobile_no'		=>	$row["mobile_no"],
 				'pin'		=>	$row["pin"]
 			);

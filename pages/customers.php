@@ -143,6 +143,7 @@
                   html += '<tr>';
                   html += '<td class="text-center">'+response.data[count].id+'</td>';
                   html += '<td class="text-center">'+response.data[count].name+'</td>';
+                  html += '<td class="text-center">'+response.data[count].email+'</td>';
                   html += '<td class="text-center">'+response.data[count].mobile_no+'</td>';
                   html += '<td class="text-center">'+response.data[count].pin+'</td>';
                   html += '</tr>';

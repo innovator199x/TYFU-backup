@@ -1,7 +1,11 @@
 
         <?php 
         $sidebar_active = 'thank_you';
-        include('./template/header.php'); ?>
+        include('./template/header.php');
+        $id = $_SESSION['user_id'];
+        $results = mysqli_query($conn, "SELECT * FROM user_settings WHERE user_id = $id");
+        $data = mysqli_fetch_assoc($results);
+        ?>
 
         <!-- Page Sidebar Ends-->
         <div class="page-body">
@@ -38,34 +42,34 @@
                       <div class="tab-content" id="pills-clrtabContentinfo">
                         <div class="tab-pane fade show active" id="pills-clrhomeinfo" role="tabpanel" aria-labelledby="pills-clrhome-tabinfo">
                             <button id="prev_email" class="btn btn-success pull-right" type="button" onclick="preview_html()" style=""><i class="fa fa-external-link"></i>  Preview Email</button>
-                            <button id="prev_email" class="btn btn-primary" align="center" type="button" onclick="preview_html()" style=""><i class="fa fa-save"></i>  Save Changes</button>
+                            <button class="btn btn-primary" align="center" type="button" onclick="save_changes()" style=""><i class="fa fa-save"></i>  Save Changes</button>
                             <br>
                             <br>
                             <div class="row">
                               <div class="col-xl-6">
                                 <div class="mb-3">
                                     <label class="col-form-label pt-0" for="exampleInputEmail1">Subject</label>
-                                    <input class="form-control" id="exampleInputEmail1" type="email" aria-describedby="emailHelp" placeholder="">
+                                    <input class="form-control" id="thank_you_email_subject" type="email" aria-describedby="emailHelp" placeholder="" value="<?php echo $data['thank_you_email_subject']; ?>">
                                 </div>
                                 <div class="mb-3">
                                     <label class="col-form-label pt-0" for="exampleInputPassword1">Select Follow-Up Template</label><br>
                                     <button id="prev_email" class="btn btn-primary" type="button"><i class="fa fa-envelope-o"></i>Choose Template</button>
                                 </div>
                                 <div class="form-group">
-                                    <label class="control-label" for="thank_you_email_body">Email Color</label>
-                                    <input type="color" class="form-control border_s" id="thank_you_email_color" name="thank_you_email_color" value="" colorpick-eyedropper-active="true">
+                                    <label class="control-label">Email Color</label>
+                                    <input type="color" class="form-control border_s" id="thank_you_email_color" name="thank_you_email_color" colorpick-eyedropper-active="true" value="<?php echo $data['thank_you_email_color']; ?>">
                                 </div>
                                 <div class="form-group">
-                                    <label class="control-label" for="thank_you_email_body">Button Color</label>
-                                    <input type="color" class="form-control border_s" id="thank_you_email_color" name="thank_you_email_color" value="" colorpick-eyedropper-active="true">
+                                    <label class="control-label">Button Color</label>
+                                    <input type="color" class="form-control border_s" id="thank_you_button_color" name="thank_you_button_color" colorpick-eyedropper-active="true" value="<?php echo $data['thank_you_button_color']; ?>">
                                 </div>
                                 
                               </div>
                               <div class="col-xl-6">
                                 <div class="form-group">
-                                    <label class="control-label" for="thank_you_email_body">Email Body</label><br>
+                                    <label class="control-label">Email Body</label><br>
                                     <textarea id="editor1" name="editor1" cols="20" rows="10">
-
+                                      <?php echo $data['thank_you_email_body']; ?>
                                     </textarea>
                                 </div>
                               </div>
@@ -73,10 +77,10 @@
                             <br>
                         </div>
                         <div class="tab-pane fade" id="pills-clrprofileinfo" role="tabpanel" aria-labelledby="pills-clrprofile-tabinfo">
-                        <button id="prev_email" class="btn btn-primary" align="center" type="button" onclick="preview_html()" style=""><i class="fa fa-save"></i>  Save Changes</button><br><br>
+                        <button class="btn btn-primary" align="center" type="button" onclick="save_changes()" style=""><i class="fa fa-save"></i>  Save Changes</button><br><br>
                             <div class="mb-3">
                                 <label class="col-form-label pt-0" for="exampleInputEmail1">SMS Body</label>
-                                <input class="form-control" id="exampleInputEmail1" type="text" aria-describedby="emailHelp" placeholder="">
+                                <input class="form-control" id="thank_you_sms_body" type="text" aria-describedby="emailHelp" placeholder="" value="<?php echo $data['thank_you_sms_body']; ?>">
                             </div>
                             <div class="alert alert-primary">
                             <h3><i class="fa fa-exclamation-circle"></i> Use These Merge Tags In Your SMS Body</h3>
@@ -97,4 +101,40 @@
           </div>
           <!-- Container-fluid Ends-->
         </div>
+
+        <script>
+          function save_changes() {
+            thank_you_email_subject = document.getElementById("thank_you_email_subject").value;
+            thank_you_email_body = CKEDITOR.instances.editor1.getData();
+            thank_you_email_color = document.getElementById("thank_you_email_color").value;
+            thank_you_button_color = document.getElementById("thank_you_button_color").value;
+            thank_you_sms_body = document.getElementById("thank_you_sms_body").value;
+
+
+            $.ajax({
+              url: 'action.php',
+              type: 'POST',
+              async: false,
+              data:{
+                  thank_you_email_subject: thank_you_email_subject,
+                  thank_you_email_color: thank_you_email_color,
+                  thank_you_button_color: thank_you_button_color,
+                  thank_you_email_body: thank_you_email_body,
+                  thank_you_sms_body: thank_you_sms_body,
+                  save_thank_you: 1,
+              },
+                  success: function(response){
+                    if (response == 1) {
+                      swal("Success!", "Successfully saved.", "success");
+                    } else {
+                      swal(
+                            "Error!", "Something went wrong.", "error"           
+                        )
+                    }
+                  }
+              });
+          }
+
+        </script>
+        <script src="//cdn.ckeditor.com/4.6.2/full/ckeditor.js"></script>
         <?php include('./template/footer.php'); ?>
