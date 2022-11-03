@@ -2,6 +2,7 @@
         <?php 
         $sidebar_active = 'review';
         include('./template/header.php'); ?>
+       
 
         <!-- Page Sidebar Ends-->
         <div class="page-body">
@@ -121,58 +122,65 @@
                             </div>
                             </div>
                             <hr>
-                            <div class="table-responsive">
-                   <table class="table" id="tab_logic">
-                    <tbody>
-                    <tr>
-                        <th>No</th>
-                        <th>Platform</th> 
-                        <th>Type</th>
-                        <th>Review Link</th>
-                        <th>Action</th>
-                     </tr>
-                    
-                        
-                     
-                     <tr>
-                        <td>1</td>
-                        <td>Other</td>
-                        <td>link</td>
-                        <td>5thlimbconsulting.com</td>
-                        <!--<td> <a href="?id=82"  class="btn btn-danger"> <i class="icm icm-remove2"></i> </a></td>-->
-                        <td> <a href="javascript:;" onclick="delete_confirmation(82)" class="btn btn-danger"> <i class="icm icm-remove2"></i> </a></td>
-                     </tr>
-                    
-                     
-                     <tr>
-                        <td>2</td>
-                        <td>Yelp</td>
-                        <td>link</td>
-                        <td>yelp.com/biz/kincredit-repair-huntington-beach</td>
-                        <!--<td> <a href="?id=84"  class="btn btn-danger"> <i class="icm icm-remove2"></i> </a></td>-->
-                        <td> <a href="javascript:;" onclick="delete_confirmation(84)" class="btn btn-danger"> <i class="icm icm-remove2"></i> </a></td>
-                     </tr>
-                    
-                     
-                     <tr>
-                        <td>3</td>
-                        <td>Google</td>
-                        <td>link</td>
-                        <td>ChIJX28glqFt-TIRHA4y0L2sq1k</td>
-                        <!--<td> <a href="?id=87"  class="btn btn-danger"> <i class="icm icm-remove2"></i> </a></td>-->
-                        <td> <a href="javascript:;" onclick="delete_confirmation(87)" class="btn btn-danger"> <i class="icm icm-remove2"></i> </a></td>
-                     </tr>
-                    
-                       
-                    </tbody>
-                    </table>
-                    </div>
+                            <!-- <div class="table-responsive">
+                              <table class="table display" id="basic-1"> -->
+
+                              <div class="card-body">
+                    <div class="table-responsive">
+                      <table class="table table" id="review-table">
+                                <thead>
+                                  <tr>
+                                      <th>No</th>
+                                      <th>Platform</th> 
+                                      <th>Type</th>
+                                      <th>Review Link</th>
+                                      <th>Action</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                  <td>Tiger Nixon</td>
+                                  <td>System Architect</td>
+                                  <td>Edinburgh</td>
+                                  <td>61</td>
+                                  <td>2011/04/25</td>
+                                </tr>
+                                <tr>
+                                  <td>Garrett Winters</td>
+                                  <td>Accountant</td>
+                                  <td>Tokyo</td>
+                                  <td>63</td>
+                                  <td>2011/07/25</td>
+                                </tr>
+                                <tr>
+                                  <td>Ashton Cox</td>
+                                  <td>Junior Technical Author</td>
+                                  <td>San Francisco</td>
+                                  <td>66</td>
+                                  <td>2009/01/12</td>
+                                </tr> 
+                                </tbody>
+                                </table>
+                            </div>
                         </div>
-                  </div>
+                        </div>
+                    </div>
                 </div>
 
 
           </div>
           <!-- Container-fluid Ends-->
         </div>
+
+        <!-- Plugins JS start-->
+        <script src="../assets/js/sidebar-menu.js"></script>
+        <script src="../assets/js/datatable/datatables/jquery.dataTables.min.js"></script>
+        <script src="../assets/js/datatable/datatables/datatable.custom.js"></script>
+        <script src="../assets/js/tooltip-init.js"></script>
+        <!-- Plugins JS Ends-->
+        <script>
+          // $(document).ready( function () {
+            $('#review-table').DataTable();
+        // } );
+        </script>
         <?php include('./template/footer.php'); ?>

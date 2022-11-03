@@ -32,7 +32,7 @@
     <script src="../assets/js/chart/apex-chart/apex-chart.js"></script>
     <script src="../assets/js/chart/apex-chart/stock-prices.js"></script>
     <script src="../assets/js/notify/bootstrap-notify.min.js"></script>
-    <script src="../assets/js/dashboard/default.js"></script>
+    <!-- <script src="../assets/js/dashboard/default.js"></script> -->
     <script src="../assets/js/datepicker/date-picker/datepicker.js"></script>
     <script src="../assets/js/datepicker/date-picker/datepicker.en.js"></script>
     <script src="../assets/js/datepicker/date-picker/datepicker.custom.js"></script>

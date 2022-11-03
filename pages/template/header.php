@@ -39,7 +39,6 @@ include('./inc/myfunctions.php');
     <link id="color" rel="stylesheet" href="../assets/css/color-1.css" media="screen">
     <!-- Responsive css-->
     <link rel="stylesheet" type="text/css" href="../assets/css/responsive.css">
-
     
   </head>
 
@@ -48,7 +47,7 @@ include('./inc/myfunctions.php');
       color: #4E0275;
     } */
   </style>
-  <body onload="startTime()" class="dark-only">
+  <body class="dark-only">
   <!-- <body onload="startTime()" > -->
     <!-- loader starts-->
     <div class="loader-wrapper">
