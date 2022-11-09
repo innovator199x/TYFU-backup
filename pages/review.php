@@ -1,7 +1,10 @@
 
         <?php 
         $sidebar_active = 'review';
-        include('./template/header.php'); ?>
+        include('./template/header.php');
+        $results = mysqli_query($conn, "SELECT * FROM bt_review WHERE bt_review.user_id = $id AND bt_review.isDELETE = 0");
+        // $data = mysqli_fetch_assoc($results);
+        ?>
        
 
         <!-- Page Sidebar Ends-->
@@ -125,9 +128,9 @@
                             <!-- <div class="table-responsive">
                               <table class="table display" id="basic-1"> -->
 
-                              <div class="card-body">
+                  <div class="card-body">
                     <div class="table-responsive">
-                      <table class="table table" id="review-table">
+                      <table class="table table-bordered" id="review-table">
                                 <thead>
                                   <tr>
                                       <th>No</th>
@@ -138,49 +141,61 @@
                                   </tr>
                                 </thead>
                                 <tbody>
+                                  <?php
+                                  $i = 1;
+                                  while($data = mysqli_fetch_array($results)) {
+                                  ?>
                                 <tr>
-                                  <td>Tiger Nixon</td>
-                                  <td>System Architect</td>
-                                  <td>Edinburgh</td>
-                                  <td>61</td>
-                                  <td>2011/04/25</td>
+                                  <td><?=$i++;?></td>
+                                  <td><?=$data['platform'];?></td>
+                                  <td><?=$data['type'];?></td>
+                                  <td><?=$data['review_link'];?></td>
+                                  <td>
+                                  <a href="javascript:;" onclick="delete_review(<?php echo $data['id']; ?>)" class="btn btn-danger"> <i class="icofont icofont-ui-delete"></i> </a>
+                                  </td>
                                 </tr>
-                                <tr>
-                                  <td>Garrett Winters</td>
-                                  <td>Accountant</td>
-                                  <td>Tokyo</td>
-                                  <td>63</td>
-                                  <td>2011/07/25</td>
-                                </tr>
-                                <tr>
-                                  <td>Ashton Cox</td>
-                                  <td>Junior Technical Author</td>
-                                  <td>San Francisco</td>
-                                  <td>66</td>
-                                  <td>2009/01/12</td>
-                                </tr> 
+                                  <?php
+                                  }
+                                  ?>
                                 </tbody>
                                 </table>
                             </div>
                         </div>
                         </div>
                     </div>
-                </div>
+                  </div>
 
 
           </div>
           <!-- Container-fluid Ends-->
         </div>
 
-        <!-- Plugins JS start-->
-        <script src="../assets/js/sidebar-menu.js"></script>
-        <script src="../assets/js/datatable/datatables/jquery.dataTables.min.js"></script>
-        <script src="../assets/js/datatable/datatables/datatable.custom.js"></script>
-        <script src="../assets/js/tooltip-init.js"></script>
-        <!-- Plugins JS Ends-->
         <script>
-          // $(document).ready( function () {
-            $('#review-table').DataTable();
-        // } );
+          function delete_review(id) {
+            if (confirm('Are you sure you want to delete it?')) {
+              $.ajax({
+              url: 'action.php',
+              type: 'POST',
+              async: false,
+              data:{
+                  id:id,
+                  delete_review: 1,
+              },
+                  success: function(response){
+                    if (response == 1) {
+                      swal("Success!", "Successfully saved.", "success");
+                      setTimeout(function(){
+                        window.location.reload();
+                      }, 1000);
+                    } else {
+                      swal(
+                            "Error!", "Something went wrong.", "error"           
+                        );
+                    }
+                    
+                  }
+              });
+            }
+          }
         </script>
         <?php include('./template/footer.php'); ?>

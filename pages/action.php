@@ -24,4 +24,12 @@
 
     }
 
+    if(isset($_POST['delete_review'])){ 
+        $review_id = $_POST['id'];
+        $results = mysqli_query($conn, "UPDATE bt_review SET bt_review.isDELETE = 1 WHERE bt_review.id = '$review_id'");
+        if ($results) {
+            echo 1;
+        }
+    }
+
 ?>
