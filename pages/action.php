@@ -32,4 +32,21 @@
         }
     }
 
+    if(isset($_POST['save_review_text'])){ 
+        $review_text = $_POST['review_text'];
+        $results = mysqli_query($conn, "UPDATE user_settings SET user_settings.review_site_description = '$review_text' WHERE user_settings.user_id = $id");
+        if ($results) {
+            echo 1;
+        }
+    }
+
+    if(isset($_POST['save_review_link'])){ 
+        $question = $_POST['question'];
+        $review_link = $_POST['review_link'];
+        $results = mysqli_query($conn, "INSERT INTO bt_review (bt_review.user_id, bt_review.platform, bt_review.review_link) VALUES ($id, '$question', '$review_link')");
+        if ($results) {
+            echo 1;
+        }
+    }
+
 ?>
