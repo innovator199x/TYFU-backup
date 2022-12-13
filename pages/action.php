@@ -104,4 +104,65 @@
         ';
     }
 
+    if(isset($_POST['add_new_review'])){ 
+        $question = $_POST['question'];
+        $question_type = $_POST['question_type'];
+        $ans1 = $_POST['ans1'];
+        $ans2 = $_POST['ans2'];
+        $ans3 = $_POST['ans3'];
+        $ans4 = $_POST['ans4'];
+        $ans5 = $_POST['ans5'];
+        $offer_date = date("Y-m-d");
+        $table = 'questions';
+
+        $values = array($id,$_POST['status'],$question,$question_type,$ans1, $ans2, $ans3, $ans4, $ans5, $offer_date);
+        $rows = array('user_id','status','question','question_type' ,'ans1', 'ans2', 'ans3', 'ans4', 'ans5', 'timestamp');
+
+        $insert = 'INSERT INTO ' . $table;
+            if (count($rows) > 0) {
+                $insert .= ' (' . implode(",", $rows) . ')';
+            }
+
+            for ($i = 0; $i < count($values); $i++) {
+                if (is_string($values[$i]))
+                    $values[$i] = '"' . $values[$i] . '"';
+            }
+            $values = implode(',', $values);
+            $insert .= ' VALUES (' . $values . ')';
+        $results = mysqli_query($conn, $insert);
+
+        if ($results) {
+            echo 1;
+        }
+    }
+
+    if(isset($_POST['delete_survey'])){ 
+        $id = $_POST['id'];
+
+        $results = mysqli_query($conn, "UPDATE questions SET isDelete = 1 WHERE id = $id");
+
+        if ($results) {
+            echo 1;
+        }
+    }
+
+    if(isset($_POST['update_survey_status'])){ 
+        $sid = $_POST['sid'];
+        $status = $_POST['status'];
+
+        if ($status == 1) {
+            $newstatus = 0;
+        } else {
+            $newstatus = 1;
+        }
+
+        $results = mysqli_query($conn, "UPDATE questions SET status = $newstatus WHERE id = $sid");
+
+        if ($results) {
+            echo 1;
+        }
+    }
+
+    mysqli_close($conn);
+
 ?>

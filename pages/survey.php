@@ -1,7 +1,9 @@
 
         <?php 
         $sidebar_active = 'survey';
-        include('./template/header.php'); ?>
+        include('./template/header.php');
+        $results = mysqli_query($conn, "SELECT * FROM questions WHERE questions.isDelete = 0 AND questions.user_id = $id AND questions.question_type!='upsell'");
+        ?>
 
         <!-- Page Sidebar Ends-->
         <div class="page-body">
@@ -28,271 +30,105 @@
                 </div>
             </div><br>
             <div class="row">
-                <div class="col-sm-6">
-
+                <div class="col-sm-12 col-xl-6">
                     <div class="card" id="default">
                     <div class="card-header">
                         <h5>Add Survey Question For Customer</h5>
                         <div class="card-header-right">
-                        <ul class="list-unstyled card-option">
-                            <li><i class="fa fa-spin fa-cog"></i></li>
-                            <li><i class="icofont icofont-maximize full-card"></i></li>
-                            <li><i class="icofont icofont-minus minimize-card"></i></li>
-                            <li><i class="icofont icofont-refresh reload-card"></i></li>
-                        </ul>
+                            <ul class="list-unstyled card-option">
+                                <li><i class="fa fa-spin fa-cog"></i></li>
+                                <li><i class="icofont icofont-maximize full-card"></i></li>
+                                <li><i class="icofont icofont-minus minimize-card"></i></li>
+                                <li><i class="icofont icofont-refresh reload-card"></i></li>
+                            </ul>
                         </div>
                     </div>
                     <div class="card-body btn-showcase">
-                    <div class="panel panel-body">
-                                    <form method="post" id="reg-form">
-                              
-                                
-
-                                            <input type="text" name="question" value="" id="question" placeholder="Enter Your Question" class="form-control"><br>
-                                            
-                                             
-                                                <label class="checkbox-inline no-padding">
-                                                    <input type="radio" name="question_type" id="question_multiple" checked="" value="multiple" class="question_type "> Multiple Choice Answers 
-                                                    <input type="radio" name="question_type" id="question_written" value="written" class="question_type "> Written Answer
-                                                </label>
-                                            
-                                            
-                                            <br><br>
-                                            
-                                          <div class="multiple_answer_div">
-                                            <input type="text" value="" name="answer1" id="ans1" placeholder="Answer 1 " class="form-control">
-                                            <br>
-                                            <input type="text" value="" name="answer2" id="ans2" placeholder="Answer 2 " class="form-control">
-                                            <br>
-                                            <input type="text" value="" name="answer3" id="ans3" placeholder="Answer 3 Optional" class="form-control">
-                                            <br>
-                                            <input type="text" value="" name="answer4" id="ans4" placeholder="Answer 4 Optional" class="form-control">
-                                            <br>
-                                            <input type="text" value="" name="answer5" id="ans5" placeholder="Answer 5 Optional" class="form-control">
-                                            <input type="hidden" name="user_id" value="">
-                                            <input type="hidden" name="status" value="1">
-                                            
-                                            
-                                            <br>
-                                          </div>  
-                                          
-                                            
-                                            
-                                            
-                                                            <!-- <input onclick="change()" type="submit" class="btn btn-success" value="Save" id="myButton1" /> -->
-
-                                        <span id="addr1"></span>
-
-                                        <center><button type="submit" id="save_form1" name="question_submit" class="btn btn-info"> Add A New Review Question - Survey Tab </button></center>
-
-                                    </form>
-                                </div>
-                    </div>
+                        <div class="panel panel-body">
+                                <input type="text" name="question" value="" id="question" placeholder="Enter Your Question" class="form-control"><br>
+                                    <label class="checkbox-inline no-padding">
+                                        <input type="radio" name="question_type" onchange="question_type1()" id="question_multiple" checked="" value="multiple" class="question_type"> Multiple Choice Answers 
+                                        <input type="radio" name="question_type" onchange="question_type2()" id="question_written" value="written" class="question_type "> Written Answer
+                                    </label>
+                                <br><br>
+                                <div class="multiple_answer_div">
+                                    <input type="text" value="" name="answer1" id="ans1" placeholder="Answer 1 " class="form-control">
+                                    <br>
+                                    <input type="text" value="" name="answer2" id="ans2" placeholder="Answer 2 " class="form-control">
+                                    <br>
+                                    <input type="text" value="" name="answer3" id="ans3" placeholder="Answer 3 Optional" class="form-control">
+                                    <br>
+                                    <input type="text" value="" name="answer4" id="ans4" placeholder="Answer 4 Optional" class="form-control">
+                                    <br>
+                                    <input type="text" value="" name="answer5" id="ans5" placeholder="Answer 5 Optional" class="form-control">
+                                    <input type="hidden" name="status" id="status" value="1">
+                                    <br>
+                                </div>  
+                                <span id="addr1"></span>
+                                <center><button type="button" id="save_form1" name="question_submit" onclick="add_new_review()" class="btn btn-info"> Add A New Review Question - Survey Tab </button></center>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="col-sm-6">
-
-                    <div class="card" id="default">
+                <div class="col-sm-12 col-xl-6">
+                    <div class="card">
                     <div class="card-header">
-                        <h5>Questions List</h5>
+                        <h5>Questions List</h5><span>Green - Show | Red - Hidden</span>
                         <div class="card-header-right">
-                        <ul class="list-unstyled card-option">
-                            <li><i class="fa fa-spin fa-cog"></i></li>
-                            <li><i class="icofont icofont-maximize full-card"></i></li>
-                            <li><i class="icofont icofont-minus minimize-card"></i></li>
-                            <li><i class="icofont icofont-refresh reload-card"></i></li>
-                        </ul>
+                            <ul class="list-unstyled card-option">
+                                <li><i class="fa fa-spin fa-cog"></i></li>
+                                <li><i class="icofont icofont-maximize full-card"></i></li>
+                                <li><i class="icofont icofont-minus minimize-card"></i></li>
+                                <li><i class="icofont icofont-refresh reload-card"></i></li>
+                            </ul>
                         </div>
                     </div>
-                    <div class="card-body btn-showcase">
-                    <div class="panel-group accordion accordion3 ui-sortable" id="accordion3">
-                        <div class=" panel panel-info" style="">
-                        </div>                    
-                       
-                       
-                             
-                                <!--<div class="col-md-12 ">--->
-                                 
-                                
-                                                            
-                                    <div class=" panel panel-default item-sort" style="margin-top: 5px;" id="207">
-                                            <div class="panel panel-heading handle">
-                                                <h4 class="panel-title" style="width: 70%">
-                                                   
-                                                    <a class="accordion-toggle accordion-toggle-styled collapsed" data-toggle="collapse" data-parent="#accordion3" href="#collapse_1" aria-expanded="false"> <b>Question: </b> How was our service? </a>
-                                                </h4>
-                                                <div class="test">
-                                                    
-                                                <div class="btn btn-success pull-right" style="margin-top: -25px;"><i class="icm icm-move"></i></div>
-                                                
-                                                <div class="pull-right" style="margin-top: -27px;">
-                                                    <div class="bootstrap-switch-on bootstrap-switch bootstrap-switch-wrapper bootstrap-switch-animate" style="width: 122px;"><div class="bootstrap-switch-container" style="width: 180px; margin-left: 0px;"><span class="bootstrap-switch-handle-on bootstrap-switch-success" style="width: 60px;">Show</span><span class="bootstrap-switch-label" style="width: 60px;">&nbsp;</span><span class="bootstrap-switch-handle-off bootstrap-switch-default" style="width: 60px;">Hide</span><input checked="" data-on-text="Show" data-on-color="success" data-off-text="Hide" value="207" class="switch-size" type="checkbox"></div></div>
-                                                </div>
-                                                </div>
-                                                
-                                            </div>
-                                            <div id="collapse_1" class="panel-collapse page_row_parent collapse" aria-expanded="false" style="height: 0px;"> 
-                                            <div class="panel panel-body">
-                                           
-                                                                                            <ul style="list-style: none;">
-                                                        <li><i class="fa fa-hand-o-right"></i>Ans1: &nbsp;Good</li>
-                                                        <li><i class="fa fa-hand-o-right"></i>Ans2: &nbsp;Bad</li>
-                                                        <li><i class="fa fa-hand-o-right"></i>Ans3: &nbsp;-</li>
-                                                        <li><i class="fa fa-hand-o-right"></i>Ans4: &nbsp;-</li>
-                                                        <li><i class="fa fa-hand-o-right"></i>Ans5: &nbsp;-</li>                                          
-                                                      </ul>
-                                                   
-                                                
-                                                
-                                                 
-                                                
-                                            </div>
-                                            <div class="panel panel-footer">
-                                                <center><a href="javascript:;" class="btn btn-danger" onclick="del_question(207,this)"><i class="icm icm-remove2"></i></a></center>
-                                            </div>
-                                            </div>
+                    <div class="card-body">
+                        <div class="default-according" id="accordionclose">
+                            <?php 
+                            $i = 1;
+                            $a = 1;
+                            while($data = mysqli_fetch_array($results)) {
+                            ?>
+                            <div class="card">
+                                <div class="card-header" id="heading1">
+                                    <h5 class="mb-0">
+                                        <button style="background-color:<?php echo ($data['status'] == 1)? 'rgb(81 187 37 / 80%);':'#dc3545;'; ?>" class="btn btn-link" data-bs-toggle="collapse" data-bs-target="#collapse<?php echo $i++; ?>" aria-expanded="true" aria-controls="heading1"><?=$data['question']?></button>
+                                    </h5>
+                                </div>
+                                <div class="collapse" id="collapse<?php echo $a++; ?>" aria-labelledby="heading1" data-bs-parent="#accordionclose">
+                                <div class="card-body">
+                                    <?php if($data['question_type'] == 'written'){ ?>
+                                        <div class="text-center">     
+                                            <h6>Written Answer</h6>
                                         </div>
-                                        
-                                       <!--</div> -->
-                                        
-                                    
-                                         
-                                <!--<div class="col-md-12 ">--->
-                                 
-                                
-                                                            
-                                    <div class=" panel panel-default item-sort" style="margin-top: 5px;" id="206">
-                                            <div class="panel panel-heading handle">
-                                                <h4 class="panel-title" style="width: 70%">
-                                                   
-                                                    <a class="accordion-toggle accordion-toggle-styled collapsed" data-toggle="collapse" data-parent="#accordion3" href="#collapse_2" aria-expanded="false"> <b>Question: </b> How old are you? </a>
-                                                </h4>
-                                                <div class="test">
-                                                    
-                                                <div class="btn btn-success pull-right" style="margin-top: -25px;"><i class="icm icm-move"></i></div>
-                                                
-                                                <div class="pull-right" style="margin-top: -27px;">
-                                                    <div class="bootstrap-switch-on bootstrap-switch bootstrap-switch-wrapper bootstrap-switch-animate" style="width: 122px;"><div class="bootstrap-switch-container" style="width: 180px; margin-left: 0px;"><span class="bootstrap-switch-handle-on bootstrap-switch-success" style="width: 60px;">Show</span><span class="bootstrap-switch-label" style="width: 60px;">&nbsp;</span><span class="bootstrap-switch-handle-off bootstrap-switch-default" style="width: 60px;">Hide</span><input checked="" data-on-text="Show" data-on-color="success" data-off-text="Hide" value="206" class="switch-size" type="checkbox"></div></div>
-                                                </div>
-                                                </div>
-                                                
-                                            </div>
-                                            <div id="collapse_2" class="panel-collapse page_row_parent collapse" aria-expanded="false" style="height: 0px;"> 
-                                            <div class="panel panel-body">
-                                           
-                                                                                            <ul style="list-style: none;">
-                                                        <li><i class="fa fa-hand-o-right"></i>Ans1: &nbsp;18-20</li>
-                                                        <li><i class="fa fa-hand-o-right"></i>Ans2: &nbsp;21-25</li>
-                                                        <li><i class="fa fa-hand-o-right"></i>Ans3: &nbsp;26-30</li>
-                                                        <li><i class="fa fa-hand-o-right"></i>Ans4: &nbsp;-</li>
-                                                        <li><i class="fa fa-hand-o-right"></i>Ans5: &nbsp;-</li>                                          
-                                                      </ul>
-                                                   
-                                                
-                                                
-                                                 
-                                                
-                                            </div>
-                                            <div class="panel panel-footer">
-                                                <center><a href="javascript:;" class="btn btn-danger" onclick="del_question(206,this)"><i class="icm icm-remove2"></i></a></center>
-                                            </div>
-                                            </div>
-                                        </div>
-                                        
-                                       <!--</div> -->
-                                        
-                                    
-                                         
-                                <!--<div class="col-md-12 ">--->
-                                 
-                                
-                                                            
-                                    <div class=" panel panel-default item-sort" style="margin-top: 5px;" id="204">
-                                            <div class="panel panel-heading handle">
-                                                <h4 class="panel-title" style="width: 70%">
-                                                   
-                                                    <a class="accordion-toggle accordion-toggle-styled collapsed" data-toggle="collapse" data-parent="#accordion3" href="#collapse_3" aria-expanded="false"> <b>Question: </b> How did you find us? </a>
-                                                </h4>
-                                                <div class="test">
-                                                    
-                                                <div class="btn btn-success pull-right" style="margin-top: -25px;"><i class="icm icm-move"></i></div>
-                                                
-                                                <div class="pull-right" style="margin-top: -27px;">
-                                                    <div class="bootstrap-switch-on bootstrap-switch bootstrap-switch-wrapper bootstrap-switch-animate" style="width: 122px;"><div class="bootstrap-switch-container" style="width: 180px; margin-left: 0px;"><span class="bootstrap-switch-handle-on bootstrap-switch-success" style="width: 60px;">Show</span><span class="bootstrap-switch-label" style="width: 60px;">&nbsp;</span><span class="bootstrap-switch-handle-off bootstrap-switch-default" style="width: 60px;">Hide</span><input checked="" data-on-text="Show" data-on-color="success" data-off-text="Hide" value="204" class="switch-size" type="checkbox"></div></div>
-                                                </div>
-                                                </div>
-                                                
-                                            </div>
-                                            <div id="collapse_3" class="panel-collapse page_row_parent collapse" aria-expanded="false" style="height: 0px;"> 
-                                            <div class="panel panel-body">
-                                           
-                                                                                            <ul style="list-style: none;">
-                                                        <li><i class="fa fa-hand-o-right"></i>Ans1: &nbsp;Friend</li>
-                                                        <li><i class="fa fa-hand-o-right"></i>Ans2: &nbsp;Social Media</li>
-                                                        <li><i class="fa fa-hand-o-right"></i>Ans3: &nbsp;Online Review Site</li>
-                                                        <li><i class="fa fa-hand-o-right"></i>Ans4: &nbsp;Walk/Drive by</li>
-                                                        <li><i class="fa fa-hand-o-right"></i>Ans5: &nbsp;Other</li>                                          
-                                                      </ul>
-                                                   
-                                                
-                                                
-                                                 
-                                                
-                                            </div>
-                                            <div class="panel panel-footer">
-                                                <center><a href="javascript:;" class="btn btn-danger" onclick="del_question(204,this)"><i class="icm icm-remove2"></i></a></center>
-                                            </div>
-                                            </div>
-                                        </div>
-                                        
-                                       <!--</div> -->
-                                        
-                                    
-                                         
-                                <!--<div class="col-md-12 ">--->
-                                 
-                                
-                                                            
-                                    <div class=" panel panel-default item-sort" style="margin-top: 5px;" id="208">
-                                            <div class="panel panel-heading handle">
-                                                <h4 class="panel-title" style="width: 70%">
-                                                   
-                                                    <a class="accordion-toggle accordion-toggle-styled collapsed" data-toggle="collapse" data-parent="#accordion3" href="#collapse_4" aria-expanded="false"> <b>Question: </b> Please right your experience shortly. </a>
-                                                </h4>
-                                                <div class="test">
-                                                    
-                                                <div class="btn btn-success pull-right" style="margin-top: -25px;"><i class="icm icm-move"></i></div>
-                                                
-                                                <div class="pull-right" style="margin-top: -27px;">
-                                                    <div class="bootstrap-switch-on bootstrap-switch bootstrap-switch-wrapper bootstrap-switch-animate" style="width: 122px;"><div class="bootstrap-switch-container" style="width: 180px; margin-left: 0px;"><span class="bootstrap-switch-handle-on bootstrap-switch-success" style="width: 60px;">Show</span><span class="bootstrap-switch-label" style="width: 60px;">&nbsp;</span><span class="bootstrap-switch-handle-off bootstrap-switch-default" style="width: 60px;">Hide</span><input checked="" data-on-text="Show" data-on-color="success" data-off-text="Hide" value="208" class="switch-size" type="checkbox"></div></div>
-                                                </div>
-                                                </div>
-                                                
-                                            </div>
-                                            <div id="collapse_4" class="panel-collapse page_row_parent collapse" aria-expanded="false" style="height: 0px;"> 
-                                            <div class="panel panel-body">
-                                           
-                                                                                                   <div class="text-center">
-                                                    
-                                                            <h6>Written Answer</h6>
-                                                    
-                                                       </div>
-                                                 
-                                                
-                                            </div>
-                                            <div class="panel panel-footer">
-                                                <center><a href="javascript:;" class="btn btn-danger" onclick="del_question(208,this)"><i class="icm icm-remove2"></i></a></center>
-                                            </div>
-                                            </div>
-                                        </div>
-                                        
-                                       <!--</div> -->
-                                        
-                                    
-                                                                            </div>
+                                    <?php } else { ?>
+                                    <ul style="list-style: none;">
+                                        <li><i class="fa fa-hand-o-right"></i>Ans1:</b> &nbsp;<?php echo ($data['ans1']=='')?'-':$data['ans1']; ?></li>
+                                        <li><i class="fa fa-hand-o-right"></i>Ans2:</b> &nbsp;<?php echo ($data['ans2']=='')?'-':$data['ans2']; ?></li>
+                                        <li><i class="fa fa-hand-o-right"></i>Ans3:</b> &nbsp;<?php echo ($data['ans3']=='')?'-':$data['ans3']; ?></li>
+                                        <li><i class="fa fa-hand-o-right"></i>Ans4:</b> &nbsp;<?php echo ($data['ans4']=='')?'-':$data['ans4'];; ?></li>
+                                        <li><i class="fa fa-hand-o-right"></i>Ans5:</b> &nbsp;<?php echo ($data['ans5']=='')?'-':$data['ans5']; ?></li>                                          
+                                    </ul>
+                                    <?php } ?>
+                                    <br>
+                                    <ul style="list-style: none;">
+                                        <li><i class="fa fa-eye"></i>Hide:</b> &nbsp;
+                                        <input type="checkbox" onchange="update_survey_status(<?php echo $data['id']; ?>,<?php echo $data['status']; ?>)" <?php echo ($data['status'] == 1)? '':'checked'; ?>/>
+                                        </li>                                        
+                                    </ul>
+                                    <div class="text-center">
+                                        <a href="javascript:;" onclick="delete_survey(<?php echo $data['id']; ?>)" class="btn btn-danger"> <i class="icofont icofont-ui-delete"></i> </a>
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
+                            <?php } ?>
+                        </div>
                     </div>
                     </div>
                 </div>
+
                 <div class="col-sm-6">
 
                     <div class="card" id="default">
@@ -392,4 +228,159 @@
           </div>
           <!-- Container-fluid Ends-->
         </div>
+        <script>
+        function question_type1() {
+            $(".multiple_answer_div").show(1000);
+        }
+
+        function question_type2() {
+            $(".multiple_answer_div").hide(1000);
+        }
+        
+        function add_new_review() {
+
+            if($('input[name="question_type"]:checked').val()=='multiple')
+            {
+                if($("#question").val()==""){
+                    
+                    swal(
+                        "Alert!", "Please Enter Your Question", "error"           
+                    );
+                    
+                        $("#question").focus();
+        
+                        return false;
+        
+                    } 
+                    if($("#ans1").val()==""){
+                    
+                    swal(
+                        "Alert!", "Please Enter Answer 1", "error"           
+                    );
+                    
+                        $("#ans1").focus();
+        
+                        return false;
+        
+                    } 
+                    if($("#ans2").val()==""){
+                    
+                    swal(
+                        "Alert!", "Please Enter Answer 2", "error"           
+                    );
+                    
+                        $("#ans2").focus();
+        
+                        return false;
+        
+                    } 
+            }else
+            {
+                if($("#question").val()==""){
+                    
+                    swal(
+                        "Alert!", "Please Enter Your Question", "error"           
+                    );
+                    
+                        $("#question").focus();
+        
+                        return false;
+        
+                    } 
+            }
+        question = $("#question").val();
+        question_type = $('input[name="question_type"]:checked').val();
+        
+        ans1 = $("#ans1").val();
+        ans2 = $("#ans2").val();
+        ans3 = $("#ans3").val();
+        ans4 = $("#ans4").val();
+        ans5 = $("#ans5").val();
+        status = $("#status").val();
+            $.ajax({
+              url: 'action.php',
+              type: 'POST',
+              async: false,
+              data:{
+                question: question,
+                question_type: question_type,
+                ans1: ans1,
+                ans2: ans2,
+                ans3: ans3,
+                ans4: ans4,
+                ans5: ans5,
+                status: status,
+                add_new_review: 1,
+              },
+                  success: function(response){
+                    // alert(response);
+                    if (response == 1) {
+                      swal("Success!", "Successfully saved.", "success");
+                      setTimeout(function(){
+                        window.location.reload();
+                      }, 1000);
+                    } else {
+                      swal(
+                            "Error!", "Something went wrong.", "error"           
+                        );
+                    }
+                    
+                  }
+              });
+
+        }
+
+        function delete_survey(id){
+            if (confirm("Are you sure?")) {
+            $.ajax({
+              url: 'action.php',
+              type: 'POST',
+              async: false,
+              data:{
+                id: id,
+                delete_survey: 1,
+              },
+                  success: function(response){
+                    if (response == 1) {
+                      swal("Success!", "Successfully deleted.", "success");
+                      setTimeout(function(){
+                        window.location.reload();
+                      }, 1000);
+                    } else {
+                      swal(
+                            "Error!", "Something went wrong.", "error"           
+                        );
+                    }
+                    
+                  }
+              });
+            }
+        }
+
+        function update_survey_status(sid, status){
+            $.ajax({
+              url: 'action.php',
+              type: 'POST',
+              async: false,
+              data:{
+                sid: sid,
+                status: status,
+                update_survey_status: 1,
+              },
+                  success: function(response){
+                    if (response == 1) {
+                      swal("Success!", "Successfully Updated.", "success");
+                      setTimeout(function(){
+                        window.location.reload();
+                      }, 1000);
+                    } else {
+                      swal(
+                            "Error!", "Something went wrong.", "error"           
+                        );
+                    }
+                    
+                  }
+              });
+        }
+        </script>
         <?php include('./template/footer.php'); ?>
