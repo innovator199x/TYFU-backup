@@ -71,38 +71,43 @@
                 <h4 class="modal-title" id="myLargeModalLabel">Add New Customer</h4>
                 <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body">
-                    <div class="col-sm-12">
-                        <div class="card">
-                            <!-- <div class="card-body"> -->
-                                <div class="mb-3">
-                                    <label class="col-form-label pt-0">Add Customer for SINGLE Upload</label><br>
-                                    <label class="col-form-label pt-0">Name</label>
-                                    <input class="form-control" id="name" type="text" placeholder="Enter name">
-                                </div>
-                                <div class="mb-3">
-                                    <label class="col-form-label pt-0">Email Address</label>
-                                    <input class="form-control" id="mobile_number" type="email" placeholder="Email Address">
-                                </div>
-                                <div class="mb-3">
-                                    <label class="col-form-label pt-0">Country Code + Mobile Number</label>
-                                    <input class="form-control" id="business_name" type="text" placeholder="Country Code + Mobile Number">
-                                </div>
-                                <hr>
-                                <div class="mb-3">
-                                    <label class="col-form-label pt-0">Upload CSV for BULK Upload</label>
-                                    <input class="form-control" id="customer_csv" type="file">
-                                </div>
-                                <div class="mb-3">
-                                    <span class="help-block"><a class="text-primary" href="https://thankyoufollowup.com/new_design/new_user/assets/csv_format.png" target="_blank">View File Format</a></span>
-                                </div>
-                            <!-- </div> -->
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button class="btn btn-primary" type="button" data-bs-dismiss="modal" data-bs-original-title="" title="">Close</button>
-                    <button class="btn btn-secondary" type="button" data-bs-original-title="" title=""><i class="fa fa-send"></i>Send Follow-Up</button>
+                <form class="form-horizontal" action="./action.php" method="post"
+                  name="frmCSVImport" id="frmCSVImport"
+                  enctype="multipart/form-data">
+                  <div class="modal-body">
+                      <div class="col-sm-12">
+                          <div class="card">
+                              <!-- <div class="card-body"> -->
+                                  <div class="mb-3">
+                                      <label class="col-form-label pt-0">Add Customer for SINGLE Upload</label><br>
+                                      <label class="col-form-label pt-0">Name</label>
+                                      <input class="form-control" id="name" name="name" type="text" placeholder="Enter name">
+                                  </div>
+                                  <div class="mb-3">
+                                      <label class="col-form-label pt-0">Email Address</label>
+                                      <input class="form-control" id="email_address" name="email_address" type="email" placeholder="Email Address">
+                                  </div>
+                                  <div class="mb-3">
+                                      <label class="col-form-label pt-0">Country Code + Mobile Number</label>
+                                      <input class="form-control" id="mobile_number" name="mobile_number" type="text" placeholder="Country Code + Mobile Number">
+                                  </div>
+                                  <hr>
+                                  <div class="mb-3">
+                                      <label class="col-form-label pt-0">Upload CSV for BULK Upload</label>
+                                      <input class="form-control" id="customer_csv" name="customer_csv" type="file" accept=".csv">
+                                      <input class="form-control" id="add_customer" name="add_customer" type="hidden" value="1">
+                                  </div>
+                                  <div class="mb-3">
+                                      <span class="help-block"><a class="text-primary" href="https://thankyoufollowup.com/new_design/new_user/assets/csv_format.png" target="_blank">View File Format</a></span>
+                                  </div>
+                              <!-- </div> -->
+                          </div>
+                      </div>
+                  </div>
+                  <div class="modal-footer">
+                      <button class="btn btn-primary" type="button" data-bs-dismiss="modal" data-bs-original-title="" title="">Close</button>
+                      <button class="btn btn-secondary" type="submit" data-bs-original-title="" title=""><i class="fa fa-send"></i>Send Follow-Up</button>
+                  </div>
                 </div>
             </div>
             </div>
@@ -148,6 +153,8 @@
                   html += '<td class="text-center">'+response.data[count].email+'</td>';
                   html += '<td class="text-center">'+response.data[count].mobile_no+'</td>';
                   html += '<td class="text-center">'+response.data[count].pin+'</td>';
+                  html += '<td class="text-center">'+response.data[count].claimed+'</td>';
+                  html += '<td class="text-center">'+response.data[count].unclaimed+'</td>';
                   html += '</tr>';
                   serial_no++;
                 }

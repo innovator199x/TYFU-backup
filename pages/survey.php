@@ -129,7 +129,7 @@
                     </div>
                 </div>
 
-                <div class="col-sm-6">
+                <div class="col-sm-12 col-xl-6">
 
                     <div class="card" id="default">
                     <div class="card-header">
@@ -149,8 +149,6 @@
                                      <input type="hidden" name="status" value="0">
                                         <div class="row">
                                           <div class="pull-right">
-                                            <!-- <div class="bootstrap-switch-off bootstrap-switch-id-upsell bootstrap-switch bootstrap-switch-wrapper bootstrap-switch-animate" style="width: 122px;"><div class="bootstrap-switch-container" style="width: 180px; margin-left: -60px;"><span class="bootstrap-switch-handle-on bootstrap-switch-success" style="width: 60px;">Show</span><span class="bootstrap-switch-label" style="width: 60px;">&nbsp;</span><span class="bootstrap-switch-handle-off bootstrap-switch-default" style="width: 60px;">Hide</span><input data-on-text="Show" data-on-color="success" data-off-text="Hide" id="upsell" value="" class="switch-size" type="checkbox"></div></div> -->
-                                          
                                           </div>
                                           <br>
                                           <div class="col-md-9">
@@ -207,14 +205,14 @@
                                                
                                            <br>
                                         
-                                        <center><button type="submit" id="save_form1" name="question_submit2" class="btn btn-info"> Add UpSell Question</button></center>
+                                        <!-- <center><button type="submit" id="save_form1" name="question_submit2" class="btn btn-info"> Add UpSell Question</button></center> -->
 
                                     </form>
                                 </div>
                     </div>
                     </div>
                 </div>
-                <div class="col-sm-6">
+                <div class="col-sm-12 col-xl-6">
                     <div class="alert alert-success">
                         <h3><i class="fa fa-exclamation-circle"></i> Important Notice:</h3>                                                    
                         <p><i class="fa fa-hand-o-right"></i> &nbsp;You can add as many questions as you want in the system but it will only display 10 questions on the survey page which has 'show' on the status.</p>

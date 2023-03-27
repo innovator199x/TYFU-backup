@@ -35,18 +35,17 @@ if(isset($_POST["query"]))
 
 		$sample_data = array(
 			':name'			=>	'%' . $condition . '%',
-			':mobile_no'		=>	'%'	. $condition . '%',
+			// ':mobile_no'		=>	'%'	. $condition . '%',
             ':email'			=>	'%' . $condition . '%'
 		);
 
 		$query = "
 		SELECT *
-		FROM customer 
+		FROM referer 
 		WHERE (name LIKE :name 
-		OR mobile_no LIKE :mobile_no 
         OR email LIKE :email) 
         AND user_id = {$_SESSION['user_id']}
-        AND email_brod = 0
+        AND isDELETE = 0
 		ORDER BY id DESC
 		";
 
@@ -73,18 +72,14 @@ if(isset($_POST["query"]))
 
 		foreach($result as $row)
 		{
-			$id = $row["id"];
-			$query_claimed = mysqli_query($conn, "SELECT * FROM ref_rewards WHERE refferer_id = $id AND is_claim = 1");
-			$query_unclaimed = mysqli_query($conn, "SELECT * FROM ref_rewards WHERE refferer_id = $id AND is_claim = 0");
+			$refferer_id = $row["refferer_id"];
+            $query = mysqli_query($conn, "SELECT customer.name AS ref_name FROM customer WHERE customer.id = $refferer_id");
+            $datas = mysqli_fetch_assoc($query);
 			$data[] = array(
 				'id'			=>	$row["id"],
 				'name'		=>	str_ireplace($replace_array_1, $replace_array_2, $row["name"]),
 				'email'		=>	str_ireplace($replace_array_1, $replace_array_2, $row["email"]),
-				'mobile_no'		=>	str_ireplace($replace_array_1, $replace_array_2, $row["mobile_no"]),
-				'pin'		=>	str_ireplace($replace_array_1, $replace_array_2, $row["pin"]),
-				'claimed'		=>	mysqli_num_rows($query_claimed),
-				'unclaimed'		=>	mysqli_num_rows($query_unclaimed),
-				// 'post_description'	=>	str_ireplace($replace_array_1, $replace_array_2, $row["post_description"])
+				'ref'	=>	$datas["ref_name"]
 			);
 		}
 
@@ -94,8 +89,8 @@ if(isset($_POST["query"]))
 
 		$query = "
 		SELECT *
-		FROM customer 
-		WHERE user_id = {$_SESSION['user_id']} AND email_brod = 0
+		FROM referer 
+		WHERE user_id = {$id} AND isDelete = 0
 		ORDER BY id DESC
 		";
 
@@ -115,17 +110,14 @@ if(isset($_POST["query"]))
 
 		foreach($result as $row)
 		{	
-			$id = $row["id"];
-			$query_claimed = mysqli_query($conn, "SELECT * FROM ref_rewards WHERE refferer_id = $id  AND is_claim = 1");
-			$query_unclaimed = mysqli_query($conn, "SELECT * FROM ref_rewards WHERE refferer_id = $id AND is_claim = 0");
+            $refferer_id = $row["refferer_id"];
+            $query = mysqli_query($conn, "SELECT customer.name AS ref_name FROM customer WHERE customer.id = $refferer_id");
+            $datas = mysqli_fetch_assoc($query);
 			$data[] = array(
 				'id'			=>	$row["id"],
 				'name'		=>	$row["name"],
 				'email'		=>	$row["email"],
-				'mobile_no'		=>	$row["mobile_no"],
-				'pin'		=>	$row["pin"],
-				'claimed'		=>	mysqli_num_rows($query_claimed),
-				'unclaimed'		=>	mysqli_num_rows($query_unclaimed),
+				'ref'		=>	$datas['ref_name'],
 			);
 		}
 
